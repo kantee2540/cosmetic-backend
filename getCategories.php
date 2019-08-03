@@ -2,7 +2,7 @@
 include("connectDB.php");
 
 //IF CHANGE TABLE NEED TO CHANGE JSONELEMENT IN XCODE
-$sql = $_POST["sql"];
+$sql = "SELECT * FROM categories";
 
 
 if($result = mysqli_query($connectDB, $sql)){

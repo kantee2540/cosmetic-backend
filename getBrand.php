@@ -1,7 +1,7 @@
 <?php
 include("connectDB.php");
 
-$sql = $_POST["sql"];
+$sql = "SELECT * FROM product_brand";
 
 if($result = mysqli_query($connectDB, $sql)){
 
