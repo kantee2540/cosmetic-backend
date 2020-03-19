@@ -6,8 +6,8 @@ $categories = "categories_id";
 $brands = "brand_id";
 $limit = "limit";
 
-if(isset($_POST["searchbyproduct"])){
-    $sql = "SELECT * FROM product p JOIN product_brand b ON p.brand_id = b.brand_id JOIN categories c ON p.categories_id = c.categories_id WHERE p.product_name LIKE \"%" . $_POST["searchbyproduct"] . "%\"";
+if(isset($_POST["keyword"])){
+    $sql = "SELECT * FROM product p JOIN product_brand b ON p.brand_id = b.brand_id JOIN categories c ON p.categories_id = c.categories_id WHERE p.product_name LIKE \"%" . $_POST["keyword"] . "%\"";
 }
 
 else if(isset($_POST[$productId])){
@@ -42,7 +42,7 @@ if($result = mysqli_query($connectDB, $sql)){
         array_push($resultArray, $tempArray);
     }
 
-        echo json_encode($resultArray);
+    echo json_encode($resultArray);
 }
 else{
     echo "ERROR!! Check connection or sql syntax";

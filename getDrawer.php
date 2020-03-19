@@ -1,8 +1,8 @@
 <?php
 include("connectDB.php");
-$uid = $_POST["uid"];
+$userId = $_POST["user_id"];
 
-$sql = "SELECT * FROM user WHERE uid = '$uid'";
+$sql = "SELECT * FROM drawer WHERE user_id = '$userId' ";
 
 if($result = mysqli_query($connectDB, $sql)){
 
