@@ -29,9 +29,8 @@ else if(isset($_POST[$limit])){
 else{
     $sql = "SELECT * FROM product p JOIN product_brand b ON p.brand_id = b.brand_id JOIN categories c ON p.categories_id = c.categories_id";
 }
+
 //IF CHANGE TABLE NEED TO CHANGE JSONELEMENT IN XCODE
-
-
 if($result = mysqli_query($connectDB, $sql)){
 
     $resultArray = array();
@@ -47,7 +46,6 @@ if($result = mysqli_query($connectDB, $sql)){
 else{
     echo "ERROR!! Check connection or sql syntax";
 }
-
 
 mysqli_close($connectDB);
 
