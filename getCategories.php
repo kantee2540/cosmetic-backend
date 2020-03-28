@@ -21,7 +21,6 @@ else{
     echo "ERROR!! Check connection or sql syntax";
 }
 
-
 mysqli_close($connectDB);
 
 ?>

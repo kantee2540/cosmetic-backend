@@ -1,7 +1,7 @@
 <?php
 include("connectDB.php");
 
-$sql = "SELECT * FROM product_brand";
+$sql = "SELECT * FROM product_brand ORDER BY brand_name";
 
 if($result = mysqli_query($connectDB, $sql)){
 

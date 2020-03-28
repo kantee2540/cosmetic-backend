@@ -1,6 +1,4 @@
 <?php 
-$data = $_POST["key"];
-
-echo $data;
-
+$splitKeyword = explode(' ', 'dior lip');
+echo $splitKeyword[0]
 ?>
