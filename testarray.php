@@ -1,4 +1,7 @@
 <?php 
-$splitKeyword = explode(' ', 'dior lip');
-echo $splitKeyword[0]
+// $length = 6;
+// $randomletter = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $length);
+// echo $randomletter;
+
+
 ?>
