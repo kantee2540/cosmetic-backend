@@ -44,6 +44,7 @@ if($result = mysqli_query($connectDB, $sql)){
             $imageURL = $protocol . $serverurl . "/" . $uploadfile;
 
             $updateSql = "UPDATE today_topic SET topic_img = '$imageURL' WHERE topic_id = $topicId ";
+
             mysqli_query($connectDB, $updateSql);
         }else{
         }

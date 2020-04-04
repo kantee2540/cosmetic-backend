@@ -1,0 +1,37 @@
+.topbar{
+    background-color: #fc7bac;
+    padding: 20px;
+    text-align: center;
+}
+.product_title{
+    color: #ff5999;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 40px;
+}
+
+.image{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.product-row{
+    color: black;
+    height: 200px;
+    display: block;
+    margin-bottom: 10px;
+    padding: 30px;
+    border: 1px solid #D8D8D8;
+}
+
+.product-row:link{
+    text-decoration: none;
+}
+
+.product-row :hover{
+    text-decoration: none;
+}
+
+.price{
+    margin-top: 10px;
+}
