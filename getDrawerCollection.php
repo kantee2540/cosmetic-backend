@@ -9,7 +9,8 @@ AND c.drawer_id = r.drawer_id
 AND d.product_id = p.product_id
 AND p.brand_id = b.brand_id
 AND d.user_id = $userId
-AND c.drawer_id = $drawerId ";
+AND c.drawer_id = $drawerId 
+ORDER BY c.drawer_collection_id DESC";
 
 if($result = mysqli_query($connectDB, $sql)){
 

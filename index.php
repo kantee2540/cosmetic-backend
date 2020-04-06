@@ -3,8 +3,6 @@ include("connectDB.php");
 
 if (isset($_GET["cosmeticid"])){
 
-    $cosmeticId = $_GET["cosmeticid"];
-
     $productid = $_GET["cosmeticid"];
     $sql = "SELECT * FROM product WHERE product_id = $productid";
 
@@ -22,7 +20,7 @@ if (isset($_GET["cosmeticid"])){
 
     if($iPhone || $iPod || $iPad){
         //if found device as iOS
-        $pathURL = "location: cosmeticas://cosmetic?id=".$cosmeticId;
+        $pathURL = "location: cosmeticas://cosmetic?id=".$productid;
         header($pathURL);
 
     }else if ($Android){
@@ -33,7 +31,42 @@ if (isset($_GET["cosmeticid"])){
         //if found device as other device
         
     }
-}else{
+}
+
+else if (isset($_GET["topicId"])){
+
+    $topicId = $_GET["topicId"];
+
+    $sql = "SELECT * FROM today_topic WHERE topic_id = $topicId";
+
+    if ($result = mysqli_query($connectDB, $sql)){
+        $row = mysqli_fetch_assoc($result);
+    }else{
+        echo "Error";
+    }
+
+    $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+    $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+    $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+    $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+    $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+
+    if($iPhone || $iPod || $iPad){
+        //if found device as iOS
+        $pathURL = "location: cosmeticas://topic?id=".$topicId;
+        header($pathURL);
+
+    }else if ($Android){
+        //if found device as Android
+        echo "App for Android comming soon! ^_^";
+
+    }else{
+        //if found device as other device
+        
+    }
+}
+
+else{
 
 }
 
@@ -45,7 +78,10 @@ if (isset($_GET["cosmeticid"])){
 <title> 
  <?php
     if(isset($_GET["cosmeticid"])){
-        echo $row["product_name"] . " - ";
+        //Uncomment this code when app has released
+        //echo $row["product_name"] . " - "; 
+    }else if(isset($_GET["topicId"])){
+        echo $row["topic_name"] . " - ";
     }
  ?>
     Cosmeticas
