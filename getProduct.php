@@ -72,7 +72,7 @@ function getProduct($connectDB, $sql){
 }
 
 function getProductBySearch($connectDB, $keyword){
-    $splitKeyword = explode("\n", $keyword);
+    $splitKeyword = explode(" ", $keyword);
 
     $resultObject = array();
 
