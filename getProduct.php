@@ -9,6 +9,31 @@ $limit = "limit";
 if(isset($_POST["keyword"])){
     $keyword = $_POST["keyword"];
     getProductBySearch($connectDB, $keyword);
+
+}else if(isset($_POST[$categories]) && isset($_POST[$brands])){
+    $sql =  "SELECT * FROM product p 
+    JOIN product_brand b ON p.brand_id = b.brand_id 
+    JOIN categories c ON p.categories_id = c.categories_id 
+    WHERE p.categories_id = $_POST[$categories]
+    AND p.brand_id = $_POST[$brands]";
+
+    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
+        $min = $_POST["pricemin"];
+        $max = $_POST["pricemax"];
+        $sql .= " AND p.product_price >= $min AND p.product_price <= $max";
+    }
+
+    else if (isset($_POST["pricemin"])){
+        $min = $_POST["pricemin"];
+        $sql .= " AND p.product_price >= $min";
+
+    }else if(isset($_POST["pricemax"])){
+        $max = $_POST["pricemax"];
+        $sql .= " AND p.product_price <= $max";
+    }
+
+    $sql .= " ORDER BY p.product_name";
+    getProduct($connectDB, $sql);
 }
 
 else if(isset($_POST[$productId])){
@@ -23,8 +48,24 @@ else if(isset($_POST[$categories])){
     $sql =  "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
-    WHERE p.categories_id = $_POST[$categories]
-    ORDER BY p.product_name";
+    WHERE p.categories_id = $_POST[$categories]";
+
+    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
+        $min = $_POST["pricemin"];
+        $max = $_POST["pricemax"];
+        $sql .= " AND p.product_price >= $min AND p.product_price <= $max";
+    }
+
+    else if (isset($_POST["pricemin"])){
+        $min = $_POST["pricemin"];
+        $sql .= " AND p.product_price >= $min";
+
+    }else if(isset($_POST["pricemax"])){
+        $max = $_POST["pricemax"];
+        $sql .= " AND p.product_price <= $max";
+    }
+
+    $sql .= " ORDER BY p.product_name";
     getProduct($connectDB, $sql);
 }
 
@@ -32,8 +73,51 @@ else if(isset($_POST[$brands])){
     $sql = "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
-    WHERE p.brand_id = $_POST[$brands]
-    ORDER BY p.product_name";
+    WHERE p.brand_id = $_POST[$brands]";
+
+    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
+        $min = $_POST["pricemin"];
+        $max = $_POST["pricemax"];
+        $sql .= " AND p.product_price >= $min AND p.product_price <= $max";
+    }
+
+    else if (isset($_POST["pricemin"])){
+        $min = $_POST["pricemin"];
+        $sql .= " AND p.product_price >= $min";
+
+    }else if(isset($_POST["pricemax"])){
+        $max = $_POST["pricemax"];
+        $sql .= " AND p.product_price <= $max";
+    }
+
+    $sql .= " ORDER BY p.product_name";
+    getProduct($connectDB, $sql);
+}
+
+else if(isset($_POST["pricemin"]) || isset($_POST["pricemax"])){
+
+    $sql = "SELECT * FROM product p 
+    JOIN product_brand b ON p.brand_id = b.brand_id 
+    JOIN categories c ON p.categories_id = c.categories_id
+    WHERE";
+
+    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
+        $min = $_POST["pricemin"];
+        $max = $_POST["pricemax"];
+        $sql .= " p.product_price >= $min AND p.product_price <= $max";
+    }
+
+    else if (isset($_POST["pricemin"])){
+        $min = $_POST["pricemin"];
+        $sql .= " p.product_price >= $min";
+
+    }else if(isset($_POST["pricemax"])){
+        $max = $_POST["pricemax"];
+        $sql .= " p.product_price <= $max";
+    }
+
+    $sql .= " ORDER BY p.product_price";
+
     getProduct($connectDB, $sql);
 }
 

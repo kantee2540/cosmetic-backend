@@ -14,8 +14,8 @@ $randomletter = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $
 
 $insertResult = array();
 
-$sql = "INSERT INTO today_topic(topic_name, topic_description, topic_code, user_id) 
-VALUES ('$title', '$description', '$randomletter' ,$user_id)";
+$sql = "INSERT INTO today_topic(topic_name, topic_description, topic_code, user_id, view_count) 
+VALUES ('$title', '$description', '$randomletter' ,$user_id, 0)";
 
 if($result = mysqli_query($connectDB, $sql)){
 
