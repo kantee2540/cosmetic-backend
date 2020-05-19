@@ -7,7 +7,7 @@ $firstname = $_POST["firstname"];
 $lastname = $_POST["lastname"];
 $email = $_POST["email"];
 
-$sql = "INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`) VALUES (NULL, '$firstname', '$lastname', '$email')";
+$sql = "INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, profilepic) VALUES (NULL, '$firstname', '$lastname', '$email', 's')";
 
 if($connectDB->query($sql) === true){
     $response['error'] = false;
