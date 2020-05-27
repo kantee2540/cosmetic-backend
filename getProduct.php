@@ -1,5 +1,9 @@
-<?php 
+<?php
+session_start();
 include("connectDB.php");
+if(!isset($_SESSION['countedItem'])){
+    $_SESSION['countedItem'] = array();
+}
 
 $productId = "productId";
 $categories = "categories_id";
@@ -41,6 +45,7 @@ else if(isset($_POST[$productId])){
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
     WHERE p.product_id = ". $_POST[$productId];
+    countView($connectDB, $_POST[$productId]);
     getProduct($connectDB, $sql);
 }
 
@@ -121,6 +126,20 @@ else if(isset($_POST["pricemin"]) || isset($_POST["pricemax"])){
     getProduct($connectDB, $sql);
 }
 
+else if(isset($_POST["sort"])){
+    $sort = $_POST["sort"];
+    if($sort == 1){
+        $option = "p.View";
+    }else{
+        $option = "RAND()";
+    }
+    $sql = "SELECT * FROM product p 
+    JOIN product_brand b ON p.brand_id = b.brand_id 
+    JOIN categories c ON p.categories_id = c.categories_id 
+    ORDER BY $option DESC LIMIT 10";
+    getProduct($connectDB, $sql);
+}
+
 else if(isset($_POST[$limit])){
     $sql = "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
@@ -188,6 +207,13 @@ function getProductBySearch($connectDB, $keyword){
     echo json_encode($resultArray);
 }
 
+function countView($connectDB, $productId){
+
+    if(!in_array($productId, $_SESSION['countedItem'])){
+        $updateCount = mysqli_query($connectDB, "UPDATE product SET View = View + 1 WHERE product_id = $productId");
+        array_push($_SESSION['countedItem'], $productId);
+    }
+}
 
 mysqli_close($connectDB);
 

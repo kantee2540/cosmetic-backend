@@ -5,15 +5,26 @@ $topicCode = "topic_code";
 $topicId = "topic_id";
 
 if(isset($_POST[$topicCode])){
-    $sql = "SELECT * FROM packages k JOIN product p ON k.product_id = p.product_id JOIN today_topic t ON k.topic_id = t.topic_id WHERE t.topic_code = \"".$_POST[$topicCode]."\"";
+    $sql = "SELECT * FROM packages k, product p, today_topic t, categories c
+    WHERE k.product_id = p.product_id
+    AND k.topic_id = t.topic_id 
+    AND p.categories_id = c.categories_id
+    AND t.topic_code = \"".$_POST[$topicCode]."\"";
 
 }
 else if(isset($_POST[$topicId])){
-    $sql = "SELECT * FROM packages k JOIN product p ON k.product_id = p.product_id JOIN today_topic t ON k.topic_id = t.topic_id WHERE t.topic_id = ".$_POST[$topicId];
+    $sql = "SELECT * FROM packages k, product p, today_topic t, categories c
+    WHERE k.product_id = p.product_id
+    AND k.topic_id = t.topic_id 
+    AND p.categories_id = c.categories_id
+    AND t.topic_id = ".$_POST[$topicId];
 }
 
 else{
-    $sql = "SELECT * FROM packages k JOIN product p ON k.product_id = p.product_id JOIN today_topic t ON k.topic_id = t.topic_id";
+    $sql = "SELECT * FROM packages k, product p, today_topic t, categories c
+    WHERE k.product_id = p.product_id
+    AND k.topic_id = t.topic_id
+    AND p.categories_id = c.categories_id";
 }
 
 if($result = mysqli_query($connectDB, $sql)){
