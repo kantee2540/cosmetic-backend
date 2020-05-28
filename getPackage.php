@@ -4,20 +4,20 @@ include("connectDB.php");
 $topicCode = "topic_code";
 $topicId = "topic_id";
 
-if(isset($_POST[$topicCode])){
+if(isset($_GET[$topicCode])){
     $sql = "SELECT * FROM packages k, product p, today_topic t, categories c
     WHERE k.product_id = p.product_id
     AND k.topic_id = t.topic_id 
     AND p.categories_id = c.categories_id
-    AND t.topic_code = \"".$_POST[$topicCode]."\"";
+    AND t.topic_code = \"".$_GET[$topicCode]."\"";
 
 }
-else if(isset($_POST[$topicId])){
+else if(isset($_GET[$topicId])){
     $sql = "SELECT * FROM packages k, product p, today_topic t, categories c
     WHERE k.product_id = p.product_id
     AND k.topic_id = t.topic_id 
     AND p.categories_id = c.categories_id
-    AND t.topic_id = ".$_POST[$topicId];
+    AND t.topic_id = ".$_GET[$topicId];
 }
 
 else{

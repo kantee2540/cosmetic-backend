@@ -10,29 +10,29 @@ $categories = "categories_id";
 $brands = "brand_id";
 $limit = "limit";
 
-if(isset($_POST["keyword"])){
-    $keyword = $_POST["keyword"];
+if(isset($_GET["keyword"])){
+    $keyword = $_GET["keyword"];
     getProductBySearch($connectDB, $keyword);
 
-}else if(isset($_POST[$categories]) && isset($_POST[$brands])){
+}else if(isset($_GET[$categories]) && isset($_GET[$brands])){
     $sql =  "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
-    WHERE p.categories_id = $_POST[$categories]
-    AND p.brand_id = $_POST[$brands]";
+    WHERE p.categories_id = $_GET[$categories]
+    AND p.brand_id = $_GET[$brands]";
 
-    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
-        $min = $_POST["pricemin"];
-        $max = $_POST["pricemax"];
+    if (isset($_GET["pricemin"]) && isset($_GET["pricemax"])){
+        $min = $_GET["pricemin"];
+        $max = $_GET["pricemax"];
         $sql .= " AND p.product_price >= $min AND p.product_price <= $max";
     }
 
-    else if (isset($_POST["pricemin"])){
-        $min = $_POST["pricemin"];
+    else if (isset($_GET["pricemin"])){
+        $min = $_GET["pricemin"];
         $sql .= " AND p.product_price >= $min";
 
-    }else if(isset($_POST["pricemax"])){
-        $max = $_POST["pricemax"];
+    }else if(isset($_GET["pricemax"])){
+        $max = $_GET["pricemax"];
         $sql .= " AND p.product_price <= $max";
     }
 
@@ -40,33 +40,33 @@ if(isset($_POST["keyword"])){
     getProduct($connectDB, $sql);
 }
 
-else if(isset($_POST[$productId])){
+else if(isset($_GET[$productId])){
 	$sql =  "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
-    WHERE p.product_id = ". $_POST[$productId];
-    countView($connectDB, $_POST[$productId]);
+    WHERE p.product_id = ". $_GET[$productId];
+    countView($connectDB, $_GET[$productId]);
     getProduct($connectDB, $sql);
 }
 
-else if(isset($_POST[$categories])){
+else if(isset($_GET[$categories])){
     $sql =  "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
-    WHERE p.categories_id = $_POST[$categories]";
+    WHERE p.categories_id = $_GET[$categories]";
 
-    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
-        $min = $_POST["pricemin"];
-        $max = $_POST["pricemax"];
+    if (isset($_GET["pricemin"]) && isset($_GET["pricemax"])){
+        $min = $_GET["pricemin"];
+        $max = $_GET["pricemax"];
         $sql .= " AND p.product_price >= $min AND p.product_price <= $max";
     }
 
-    else if (isset($_POST["pricemin"])){
-        $min = $_POST["pricemin"];
+    else if (isset($_GET["pricemin"])){
+        $min = $_GET["pricemin"];
         $sql .= " AND p.product_price >= $min";
 
-    }else if(isset($_POST["pricemax"])){
-        $max = $_POST["pricemax"];
+    }else if(isset($_GET["pricemax"])){
+        $max = $_GET["pricemax"];
         $sql .= " AND p.product_price <= $max";
     }
 
@@ -74,24 +74,24 @@ else if(isset($_POST[$categories])){
     getProduct($connectDB, $sql);
 }
 
-else if(isset($_POST[$brands])){
+else if(isset($_GET[$brands])){
     $sql = "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
-    WHERE p.brand_id = $_POST[$brands]";
+    WHERE p.brand_id = $_GET[$brands]";
 
-    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
-        $min = $_POST["pricemin"];
-        $max = $_POST["pricemax"];
+    if (isset($_GET["pricemin"]) && isset($_GET["pricemax"])){
+        $min = $_GET["pricemin"];
+        $max = $_GET["pricemax"];
         $sql .= " AND p.product_price >= $min AND p.product_price <= $max";
     }
 
-    else if (isset($_POST["pricemin"])){
-        $min = $_POST["pricemin"];
+    else if (isset($_GET["pricemin"])){
+        $min = $_GET["pricemin"];
         $sql .= " AND p.product_price >= $min";
 
-    }else if(isset($_POST["pricemax"])){
-        $max = $_POST["pricemax"];
+    }else if(isset($_GET["pricemax"])){
+        $max = $_GET["pricemax"];
         $sql .= " AND p.product_price <= $max";
     }
 
@@ -99,25 +99,25 @@ else if(isset($_POST[$brands])){
     getProduct($connectDB, $sql);
 }
 
-else if(isset($_POST["pricemin"]) || isset($_POST["pricemax"])){
+else if(isset($_GET["pricemin"]) || isset($_GET["pricemax"])){
 
     $sql = "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id
     WHERE";
 
-    if (isset($_POST["pricemin"]) && isset($_POST["pricemax"])){
-        $min = $_POST["pricemin"];
-        $max = $_POST["pricemax"];
+    if (isset($_GET["pricemin"]) && isset($_GET["pricemax"])){
+        $min = $_GET["pricemin"];
+        $max = $_GET["pricemax"];
         $sql .= " p.product_price >= $min AND p.product_price <= $max";
     }
 
-    else if (isset($_POST["pricemin"])){
-        $min = $_POST["pricemin"];
+    else if (isset($_GET["pricemin"])){
+        $min = $_GET["pricemin"];
         $sql .= " p.product_price >= $min";
 
-    }else if(isset($_POST["pricemax"])){
-        $max = $_POST["pricemax"];
+    }else if(isset($_GET["pricemax"])){
+        $max = $_GET["pricemax"];
         $sql .= " p.product_price <= $max";
     }
 
@@ -126,8 +126,8 @@ else if(isset($_POST["pricemin"]) || isset($_POST["pricemax"])){
     getProduct($connectDB, $sql);
 }
 
-else if(isset($_POST["sort"])){
-    $sort = $_POST["sort"];
+else if(isset($_GET["sort"])){
+    $sort = $_GET["sort"];
     if($sort == 1){
         $option = "p.View";
     }else{
@@ -140,11 +140,11 @@ else if(isset($_POST["sort"])){
     getProduct($connectDB, $sql);
 }
 
-else if(isset($_POST[$limit])){
+else if(isset($_GET[$limit])){
     $sql = "SELECT * FROM product p 
     JOIN product_brand b ON p.brand_id = b.brand_id 
     JOIN categories c ON p.categories_id = c.categories_id 
-    ORDER BY RAND() LIMIT " .$_POST[$limit];
+    ORDER BY RAND() LIMIT " .$_GET[$limit];
     getProduct($connectDB, $sql);
 }
 
