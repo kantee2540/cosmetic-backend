@@ -12,12 +12,26 @@ if(isset($_POST["product_id"])){
     AND c.product_id = '$product_id'";
 
 }else if(isset($_POST["favorite"])){
+    $order = $_POST["orderby"];
     $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b
     WHERE c.product_id = p.product_id
     AND p.brand_id = b.brand_id 
     AND c.user_id = '$user_id' 
-    AND c.favorite = 1
-    ORDER BY c.desk_id DESC";
+    AND c.favorite = 1 ";
+
+    if($order == "a-z"){
+        $sql .= "ORDER BY p.product_name";
+    }
+    else if($order == "view"){
+        $sql .= "ORDER BY p.View DESC";
+    }
+    else if($order == "price"){
+        $sql .= "ORDER BY p.product_price DESC";
+    }
+    else{
+        $sql .= "ORDER BY c.desk_id DESC";
+    }
+
 
 }else if(isset($_POST["limit"])){
     $limit = $_POST["limit"];
@@ -29,11 +43,24 @@ if(isset($_POST["product_id"])){
     LIMIT $limit";
 
 }else{
+    $order = $_POST["orderby"];
     $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b
     WHERE c.product_id = p.product_id
     AND p.brand_id = b.brand_id 
-    AND c.user_id = '$user_id' 
-    ORDER BY c.desk_id DESC";
+    AND c.user_id = '$user_id' ";
+
+    if($order == "a-z"){
+        $sql .= "ORDER BY p.product_name";
+    }
+    else if($order == "view"){
+        $sql .= "ORDER BY p.View DESC";
+    }
+    else if($order == "price"){
+        $sql .= "ORDER BY p.product_price DESC";
+    }
+    else{
+        $sql .= "ORDER BY c.desk_id DESC";
+    }
 }
 
 if($result = mysqli_query($connectDB, $sql)){
