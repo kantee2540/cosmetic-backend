@@ -23,7 +23,7 @@ if($result = mysqli_query($connectDB, $sql)){
     
     if (isset($_FILES['imageFile']['name'])){
         $uploaddir = "topicImage/";
-        $file = $topicId ."_".$_FILES['imageFile']['name'];
+        $file = $topicId;
         $uploadfile = $uploaddir . $file;
         if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $uploadfile)){
     
