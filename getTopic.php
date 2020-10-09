@@ -7,6 +7,7 @@ if(!isset($_SESSION['countedItem'])){
 
 $topicCode = "topic_code";
 $topicLimit = "topic_limit";
+$topLimit = "top_limit";
 $userId = "user_id";
 
 if (isset($_GET[$topicCode])){
@@ -15,6 +16,9 @@ if (isset($_GET[$topicCode])){
 
 else if (isset($_GET[$topicLimit])){
     $sql = "SELECT * FROM today_topic t, user u WHERE t.user_id = u.user_id ORDER BY RAND() LIMIT ".$_GET[$topicLimit];
+}
+else if(isset($_GET[$topLimit])){
+    $sql = "SELECT * FROM today_topic t, user u WHERE t.user_id = u.user_id ORDER BY t.view_count DESC LIMIT ".$_GET[$topLimit];
 }
 
 else if (isset($_GET["topic_id"])){

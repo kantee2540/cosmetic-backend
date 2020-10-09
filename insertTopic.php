@@ -69,6 +69,7 @@ if($result = mysqli_query($connectDB, $sql)){
         array_push($insertResult, ["status" => "Failed", "error_detail" => "get todaytopic failed!"]);
     }
 
+    
 }else{
     if ($connectDB -> errno == 1062){
         array_push($insertResult, ["status" => "Failed", "error_detail" => "This title had already exist please try another title."]);
