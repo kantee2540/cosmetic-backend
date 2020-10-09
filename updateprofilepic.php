@@ -6,7 +6,7 @@ $userId = $_POST["user_id"];
 
 if (isset($_FILES['imageFile']['name'])){
     $uploaddir = "profileimg/";
-    $file = $userId . ".jpg";
+    $file = $userId;
     $uploadfile = $uploaddir . $file;
     if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $uploadfile)){
 
