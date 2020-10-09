@@ -23,7 +23,7 @@ if($result = mysqli_query($connectDB, $sql)){
     
     if (isset($_FILES['imageFile']['name'])){
         $uploaddir = "topicImage/";
-        $file = $topicId . ".jpg";
+        $file = $topicId ."_".$_FILES['imageFile']['name'];
         $uploadfile = $uploaddir . $file;
         if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $uploadfile)){
     
@@ -35,8 +35,8 @@ if($result = mysqli_query($connectDB, $sql)){
             }
     
             //if localserver
-            if($_SERVER["HTTP_HOST"] == "localhost:8080" || $_SERVER["HTTP_HOST"] == "192.168.1.176:8080"){
-                $serverurl = "192.168.1.176:8080/webService";
+            if($_SERVER["HTTP_HOST"] == "localhost" || $_SERVER["HTTP_HOST"] == "192.168.1.176:8080"){
+                $serverurl = "localhost/webService";
             }else{
                 $serverurl = $_SERVER["HTTP_HOST"];
             }
@@ -46,7 +46,9 @@ if($result = mysqli_query($connectDB, $sql)){
             $updateSql = "UPDATE today_topic SET topic_img = '$imageURL' WHERE topic_id = $topicId ";
 
             mysqli_query($connectDB, $updateSql);
+
         }else{
+            echo "Error";
         }
     }
 
