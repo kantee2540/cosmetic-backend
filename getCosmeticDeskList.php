@@ -5,17 +5,19 @@ $user_id = $_POST["user_id"];
 
 if(isset($_POST["product_id"])){
     $product_id = $_POST["product_id"];
-    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b 
+    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b, categories ca
     WHERE c.product_id = p.product_id 
     AND p.brand_id = b.brand_id 
+    AND p.categories_id = ca.categories_id
     AND c.user_id = '$user_id' 
     AND c.product_id = '$product_id'";
 
 }else if(isset($_POST["favorite"])){
     $order = $_POST["orderby"];
-    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b
+    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b, categories ca
     WHERE c.product_id = p.product_id
     AND p.brand_id = b.brand_id 
+    AND p.categories_id = ca.categories_id
     AND c.user_id = '$user_id' 
     AND c.favorite = 1 ";
 
@@ -35,18 +37,20 @@ if(isset($_POST["product_id"])){
 
 }else if(isset($_POST["limit"])){
     $limit = $_POST["limit"];
-    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b 
+    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b, categories ca
     WHERE c.product_id = p.product_id 
     AND p.brand_id = b.brand_id
+    AND p.categories_id = ca.categories_id
     AND c.user_id = '$user_id'
     ORDER BY c.desk_id DESC
     LIMIT $limit";
 
 }else{
     $order = $_POST["orderby"];
-    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b
+    $sql = "SELECT * FROM cosmetic_desk c, product p, product_brand b, categories ca
     WHERE c.product_id = p.product_id
     AND p.brand_id = b.brand_id 
+    AND p.categories_id = ca.categories_id
     AND c.user_id = '$user_id' ";
 
     if($order == "a-z"){
